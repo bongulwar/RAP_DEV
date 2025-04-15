@@ -1,0 +1,6 @@
+@Metadata.layer: #CUSTOMER
+annotate entity ZCE_WEIGHT_BRIDGE with
+    {
+        @UI.lineItem: [{ position: 10 }]
+        WEIGHT;
+    }

@@ -1,0 +1,52 @@
+@Metadata.layer: #PARTNER
+@Search.searchable: true
+@UI: {
+        headerInfo: {
+                       typeName:       'Invoice Item',
+                       typeNamePlural: 'Invoices Items',
+                    title: {
+                                type: #STANDARD,
+                                value: 'ReferenceDocumentItem'
+                            }
+                   }
+    }
+annotate entity ZC_CUST_INVOICE_I with
+  {
+    //    @UI.facet: [   { id: 'Invoice_Item_id',
+    //                     purpose: #STANDARD,
+    //                     type: #,
+    //                     label: 'Invoice Item Details',
+    //                     position: 10
+    //    } ]
+
+    @UI: { lineItem: [{ position: 10,label: 'Id', importance: #HIGH }]
+    //              ,identification: [{ position: 10, label: 'Id' }]
+    }
+    Id;
+    @UI: { lineItem: [{ position: 20,label: 'InvoiceNumber', importance: #HIGH }]
+    //                ,identification: [{ position: 20, label: 'InvoiceNumber' }]
+            }
+    @Search.defaultSearchElement: true
+    InvoiceNumber;
+    @UI: { lineItem: [{ position: 30,label: 'ReferenceDocumentItem', importance: #HIGH }]
+    //        ,identification: [{ position: 30, label: 'ReferenceDocumentItem' }]
+    }
+    @Search.defaultSearchElement: true
+    ReferenceDocumentItem;
+    @UI: { lineItem: [{ position: 40,label: 'Glaccount', importance: #HIGH }]
+    //        ,identification: [{ position: 40, label: 'Glaccount' }]
+     }
+    Glaccount;
+    @UI: { lineItem: [{ position: 50,label: 'AmountInTransaction', importance: #HIGH }]
+    //        ,         identification: [{ position: 50, label: 'AmountInTransaction' }]
+    }
+    AmountInTransaction;
+    @UI: { lineItem: [{ position: 60,label: 'AmountTCurrencyCode', importance: #HIGH }]
+    //        ,         identification: [{ position: 60, label: 'AmountTCurrencyCode' }]
+     }
+    AmountTCurrencyCode;
+    @UI: { lineItem: [{ position: 70,label: 'DebitCreditCode', importance: #HIGH }]
+    //        ,         identification: [{ position: 70, label: 'DebitCreditCode' }]
+    }
+    DebitCreditCode;
+  }

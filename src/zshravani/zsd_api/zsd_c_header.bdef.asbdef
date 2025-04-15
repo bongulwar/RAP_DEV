@@ -1,0 +1,17 @@
+projection;
+strict ( 2 );
+use draft;
+define behavior for ZSD_C_HEADER alias SO_Header
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Resume;
+  use action Discard;
+  use action Prepare;
+
+}

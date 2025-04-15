@@ -1,0 +1,47 @@
+unmanaged implementation in class zbp_i_doc_att_un unique; //Implementation missing for SAVE in save sequence
+//managed implementation in class zbp_i_doc_att unique; //Implementation missing for SAVE in save sequence
+strict ( 2 );
+
+with draft; //CRETE/DELETE won't work
+
+define behavior for ZI_DOC_ATT //alias <alias_name>
+//Persistency tables can only be specified for the implementation type "managed".
+//persistent table zvc_docatt
+
+draft table zvc_docatt_d
+lock master total etag Last_Changed_At
+authorization master ( instance )
+etag master Local_Last_Changed_At
+{
+  create;  //Standard Operation CREATE entity ZI_DOC_ATT not implemented
+  update;
+  delete;
+  //  field (  readonly ) Id;
+  field ( numbering : managed, readonly ) Id;
+
+  //Administratative fields
+  field ( readonly ) local_created_by, local_created_at, local_last_changed_by, local_last_changed_at, last_changed_at;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for zvc_docatt
+    {
+      Id                    = id;
+      Specification         = specification;
+      DocType               = doc_type;
+      StorageCat            = storage_cat;
+      DocNo                 = doc_no;
+      Filename              = filename;
+      Mimetype              = mimetype;
+      Attachment            = attachment;
+      Local_Created_By      = local_created_by;
+      Local_Created_At      = local_created_at;
+      Local_Last_Changed_By = local_last_changed_by;
+      Local_Last_Changed_At = local_last_changed_at;
+      last_changed_at       = Last_Changed_At;
+    }
+
+}

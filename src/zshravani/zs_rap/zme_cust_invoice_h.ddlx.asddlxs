@@ -1,0 +1,80 @@
+@Metadata.layer: #CORE
+@UI: {
+        headerInfo: {
+                       typeName:       'Invoice',
+                       typeNamePlural: 'Invoices',
+                       title: {
+                                 type:   #STANDARD,
+                                 value:  'InvoiceNumber'
+                              },
+                       description :{
+                       type: #STANDARD,
+                                        value: 'CompanyCode'
+                                    }
+                     },
+        presentationVariant: [{
+                               sortOrder: [{
+                                             by: 'InvoiceNumber',
+                                             direction: #ASC
+                                               }]
+////                                    ,visualizations: [{
+////                                                        type: #AS_LINEITEM
+////                                                    }]
+                             }]
+       }
+
+@Search.searchable: true
+annotate entity ZC_CUST_INVOICE_H with
+    {
+        @UI.facet: [
+            {
+                id: 'Invoice_h',
+                purpose: #STANDARD,
+                label: 'Invoice Details',
+                type: #IDENTIFICATION_REFERENCE,
+                position: 10
+            },
+            {
+                id: 'Invoice_Item_id',
+                 purpose: #STANDARD,
+                 label: 'Inovice Item Details',
+                 type: #LINEITEM_REFERENCE,
+                 position: 20,
+                 targetElement: '_Invoice_item'            //Association Name from Header_CDS-> to ->Item_cds
+             }
+            ]
+        @UI: { lineItem: [{ position: 10,label: 'Id', importance: #HIGH }],
+               identification: [{ position: 10, label: 'ID' }] }
+        @EndUserText.label: 'ID'
+        Id;
+        @UI: { lineItem: [{ position: 20,label: 'InvoiceNumber', importance: #HIGH }],
+               identification: [{ position: 20, label: 'InvoiceNumber' }] }
+        @Search.defaultSearchElement: true
+        @EndUserText.label: 'InvoiceNumber'
+        InvoiceNumber;
+        @UI: { lineItem: [{ position: 30,label: 'CompanyCode', importance: #HIGH }],
+               identification: [{ position: 30, label: 'CompanyCode' }] }
+        @EndUserText.label: 'CompanyCode'
+        CompanyCode;
+        @UI: { lineItem: [{ position: 40,label: ' CreatedByUser', importance: #HIGH }],
+               identification: [{ position: 40, label: ' CreatedByUser' }] }
+        @EndUserText.label: 'CreatedByUser'
+        CreatedByUser;
+        @UI: { lineItem: [{ position: 50,label: 'DocumentDate', importance: #HIGH }],
+               identification: [{ position: 50, label: 'DocumentDate' }] }
+        @EndUserText.label: 'DocumentDate'
+        DocumentDate;
+        @UI: { lineItem: [{ position: 60,label: 'PostingDate', importance: #HIGH }],
+               identification: [{ position: 60, label: 'PostingDate' }] }
+        @EndUserText.label: 'PostingDate'
+        PostingDate;
+        @UI.hidden: true
+        @EndUserText.label: 'Message'
+        Message;
+        @UI.hidden: true
+        Lastchangedat;
+        @UI.hidden: true
+        Locallastchangedat;
+        //      @UI.selectionField: [{ element: '_Invoice_item' ,position:  10 }]
+        //  _Invoice_item;
+    }

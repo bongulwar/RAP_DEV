@@ -1,0 +1,22 @@
+managed implementation in class zbp_api_inv_h unique;
+strict ( 1 );
+
+define behavior for ZAPI_INV_H alias Invoice_H
+with unmanaged save
+late numbering
+//persistent table zinvoice_h -error with unmanaged save persistent table is not allowed
+lock master
+authorization master ( instance )
+etag master Locallastchangedat
+{
+  create;
+  update;
+  delete;
+  field ( readonly ) Id, InvoiceNumber;
+}
+
+//We do not need draft capabilities because WebAPIs do synchronous calls and dont need it.
+//
+//We do not require a behavior definition for the item view since it serves only as a filter.
+//
+//Method "Delete" is included for demo purposes but not fully implemented

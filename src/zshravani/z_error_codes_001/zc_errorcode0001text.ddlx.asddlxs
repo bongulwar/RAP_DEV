@@ -1,0 +1,39 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'ErrorCode0001Text', 
+    typeNamePlural: 'ErrorCode0001Texts', 
+    title: {
+      type: #STANDARD, 
+      label: 'Error Code 0001 Text', 
+      value: 'Langu'
+    }
+  }
+}
+annotate view ZC_ErrorCode0001Text with
+{
+  @UI.facet: [ {
+    id: 'ZI_ErrorCode0001Text', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Error Code 0001 Text', 
+    position: 1 
+  } ]
+  @UI.identification: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  @UI.lineItem: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  Langu;
+  
+  @UI.identification: [ {
+    position: 2 
+  } ]
+  @UI.lineItem: [ {
+    position: 2 
+  } ]
+  Description;
+}

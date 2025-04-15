@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Def for ZCUST_JOURNALENTRY_ITEM'
+define service ZI_CUST_INVOICE {
+  expose ZC_CUST_INVOICE_H as INVOICE_H;
+  expose ZC_CUST_INVOICE_I as INVOICE_I;
+}

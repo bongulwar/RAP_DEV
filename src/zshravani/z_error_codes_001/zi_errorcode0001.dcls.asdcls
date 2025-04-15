@@ -1,0 +1,5 @@
+@MappingRole: true
+define role ZI_ErrorCode0001 {
+  grant select on ZI_ErrorCode0001
+  where ( ) = ASPECT pfcg_auth ( 'S_TABU_NAM', ACTVT = '03', TABLE = 'ZI_ERRORCODE0001' );
+}

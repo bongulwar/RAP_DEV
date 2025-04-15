@@ -1,0 +1,70 @@
+unmanaged implementation in class zbp_i_cust_invoice_h unique;
+strict ( 1 ); //Uncomment this line in order to enable strict mode 2. The strict mode has two variants (strict(1), strict(2)) and is prerequisite to be future proof regarding syntax and to be able to release your BO.
+
+//We do not need draft capabilities because WebAPIs do synchronous calls and dont need it
+//with draft; // "Commenting this line for odata v2-WEB API(Postman)
+
+define behavior for ZI_CUST_INVOICE_H alias Invoice_h
+//draft table zcust_d_inv_h
+//late numbering
+//early numbering
+lock master// total etag  lastchangedat
+authorization master ( instance )
+etag master Locallastchangedat
+{
+  create;
+  update;
+  delete;
+  //    association _Invoice_item { create; with draft; }  //"Commenting this line for odata v2-WEB API(Postman)
+  association _Invoice_item { create; }
+
+  //    draft action Edit;                                //Commenting this line for odata v2-WEB API(Postman)
+  //    draft action Activate optimized;
+  //    draft action Discard;
+  //    draft action Resume;
+  //    draft determine action Prepare;
+
+  field ( readonly ) Id, InvoiceNumber;
+
+  mapping for zinvoice_h control zcs_invoice_h //table control structure with changes/unchangd (00- value unchanged ,01- value changed )
+    {
+
+      //CDS -Field       = Table Field
+      Id                 = id;
+      InvoiceNumber      = invoice_number;
+      CompanyCode        = company_code;
+      CreatedByUser      = created_by_user;
+      DocumentDate       = document_date;
+      PostingDate        = posting_date;
+      Message            = message;
+      Lastchangedat      = lastchangedat;
+      Locallastchangedat = locallastchangedat;
+    }
+}
+
+define behavior for ZI_CUST_INVOICE_I alias Invoice_i
+//draft table zcust_d_inv_i                              //Commenting this line for odata v2-WEB API(Postman)
+//late numbering           // Call BAPI/SOAP-API
+//early numbering                                        //Commenting this line for odata v2-WEB API(Postman)
+lock dependent by _Invoice_h
+authorization dependent by _Invoice_h
+etag dependent by _Invoice_h
+{
+  update;
+  delete;
+
+  field ( readonly ) Id, InvoiceNumber;
+  field ( readonly : update ) ReferenceDocumentItem;
+  //    association _Invoice_h { with draft; }             //Commenting this line for odata v2-WEB API(Postman)
+  association _Invoice_h;
+  mapping for zinvoice_item control zcs_invoice_i
+    {
+      Id                    = id;
+      InvoiceNumber         = invoice_number;
+      ReferenceDocumentItem = reference_document_item;
+      Glaccount             = glaccount;
+      AmountInTransaction   = amount_in_transaction;
+      AmountTCurrencyCode   = amount_t_currency_code;
+      DebitCreditCode       = debit_credit_code;
+    }
+}

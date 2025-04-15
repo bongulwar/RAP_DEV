@@ -1,0 +1,41 @@
+@Metadata.layer: #PARTNER
+@UI.headerInfo: {
+     typeName      : 'Weight Bridge Details',
+     typeNamePlural: 'Weight Bridge Details',
+     title: { type: #STANDARD
+//          value:  'cardtype_desc',
+//          label: 'Type of Card'
+
+     }
+ }
+annotate entity ZWB_C_ITEM with
+{
+  @UI.facet: [   { id: 'WB_Details',
+                     purpose: #STANDARD,
+                     type: #IDENTIFICATION_REFERENCE,
+                     label: 'Weight Bridge Details',
+                     position: 10
+    } ]
+  @UI.hidden: true
+  Id;
+  @UI: { lineItem: [{ position: 10 , label: 'PO Number' }],
+   identification: [{ position: 10, label: 'PO Number' }]
+   }
+  Ebeln;
+  @UI: { lineItem: [{ position: 20 , label: 'Material Number' }],
+  identification: [{ position: 20, label: 'Material Number' }]
+  }
+  Matnr;
+  @UI: { lineItem: [{ position: 20 , label: 'PO Item' }],
+  identification: [{ position: 20, label: 'PO Item' }]
+  }
+  Posnr;
+  @UI: { lineItem: [{ position: 20 , label: 'PO Quantity' }],
+  identification: [{ position: 20, label: 'PO Quantity' }]
+  }
+  Qty;
+  @UI.hidden: true
+  Meins;
+  /* Associations */
+  // _header;
+}

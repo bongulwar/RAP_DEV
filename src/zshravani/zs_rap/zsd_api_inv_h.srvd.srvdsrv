@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Defination for ZAPI_INV_H'
+define service Zsd_API_inv_h {
+  expose ZAPI_INV_H as Invoice_H;
+  expose ZAPI_INV_I as Invoice_I;
+}

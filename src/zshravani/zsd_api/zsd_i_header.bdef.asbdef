@@ -1,0 +1,51 @@
+managed implementation in class zbp_sd_i_header_1 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZSD_I_HEADER alias SO_Header
+
+persistent table zsd_header //Managed
+
+draft table zsd_header_d
+
+//late numbering
+lock master total etag LastChangedAt
+authorization master ( instance )
+etag master LastChangedAt
+{
+  create;
+  update;
+  delete;
+  field ( numbering : managed, readonly ) Id; //Managed
+
+  // administrative fields: read only
+  field ( readonly ) LastChangedAt, LastChangedbY,
+  LocalLastChangedBy, LocalLastChangedAt,
+  CreatedBy, CreatedAt;
+
+  //Draft Action
+  draft action Edit;
+  draft action Resume;
+  draft action Activate optimized;
+  draft action Discard;
+  draft determine action Prepare
+  {
+//    validation validatelargeobject;
+  }
+
+//  validation validatelargeobject on save { field Attachment, Mimetype, Filename; }
+
+//static function Get_data_add parameter z_A_GET_date_add result[0..*] Z_A_Date_result;
+
+  mapping for zsd_header corresponding
+    {
+      OptioType          = optio_type;
+      CreatedAt          = created_at;
+      TestRun            = test_run;
+      CreatedBy          = created_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LastChangedAt      = last_changed_at;
+      LastChangedbY      = last_changed_by;
+    }
+}

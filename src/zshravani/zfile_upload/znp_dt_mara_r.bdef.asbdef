@@ -1,0 +1,47 @@
+managed implementation in class zbp_np_dt_mara_r unique;
+strict ( 2 );
+
+with draft;
+
+define behavior for znp_dt_mara_r alias ZrNpDtMara1
+persistent table znp_dt_mara1
+draft table znp_dt_mara1_d
+etag master LastChangedAt
+lock master total etag LastChangedAt
+authorization master ( global )
+{
+
+  field ( readonly )
+  Matnr,
+  CreatedBy,
+  CreatedAt,
+  LastChangedBy,
+  LastChangedAt;
+//  field ( readonly : update ) Matnr;
+
+  create;
+  update;
+  delete;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for znp_dt_mara1
+    {
+      Matnr          = matnr;
+      Mtart          = mtart;
+      Materialstatus = materialstatus;
+      Lvorm          = lvorm;
+      Attachement    = attachement;
+      Filename       = filename;
+      Mimetype       = mimetype;
+      CreatedBy      = created_by;
+      CreatedAt      = created_at;
+      LastChangedBy  = last_changed_by;
+      LastChangedAt  = last_changed_at;
+    }
+
+}

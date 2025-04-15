@@ -1,0 +1,71 @@
+unmanaged implementation in class zbp_i_invoice_h_1 unique;
+strict ( 2 );
+
+define behavior for yi_invoice_h //alias <alias_name>
+lock master
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  field ( readonly ) Id, InvoiceNumber;
+
+  association _Invoice_item { create; }
+  association _Invoice_log { create; }
+
+  mapping for yinvoice_h
+    {
+      //CDS -Field       = Table Field
+      Id                 = id;
+      InvoiceNumber      = invoice_number;
+      CompanyCode        = company_code;
+      CreatedByUser      = created_by_user;
+      DocumentDate       = document_date;
+      PostingDate        = posting_date;
+      Message            = message;
+      Lastchangedat      = lastchangedat;
+      Locallastchangedat = locallastchangedat;
+    }
+}
+
+define behavior for yi_invoice_i //alias <alias_name>
+lock dependent by _Invoice_h
+authorization dependent by _Invoice_h
+{
+  update;
+  delete;
+
+  field ( readonly ) Id, InvoiceNumber, ReferenceDocumentItem;
+
+  association _Invoice_h;
+
+  mapping for yinvoice_i
+    {
+      Id                    = id;
+      InvoiceNumber         = invoice_number;
+      ReferenceDocumentItem = reference_document_item;
+      Glaccount             = glaccount;
+      AmountInTransaction   = amount_in_transaction;
+      AmountTCurrencyCode   = amount_t_currency_code;
+      DebitCreditCode       = debit_credit_code;
+    }
+}
+
+define behavior for yi_invoice_log //alias <alias_name>
+lock dependent by _Invoice_h
+authorization dependent by _Invoice_h
+{
+  update;
+  delete;
+  field ( readonly ) Id, InvoiceNumber, ReferenceDocumentItem;
+  association _Invoice_h;
+
+  mapping for yinvoice_log
+    {
+      Id                    = id;
+      InvoiceNumber         = invoice_number;
+      ReferenceDocumentItem = reference_document_item;
+      Note                  = note;
+    }
+}

@@ -1,0 +1,41 @@
+@Metadata.layer: #PARTNER
+annotate entity ZC_DOC_ATT with
+  {
+    @UI.facet: [{
+              id: 'Doc_Att',
+              purpose: #STANDARD,
+              position: 10,
+              label:  'Document Attach',
+              type: #IDENTIFICATION_REFERENCE
+          }]
+    @UI.lineItem: [{ position: 10  }]
+    @UI.identification: [{ position: 10 }]
+    Id;
+
+    @UI.lineItem: [{ position: 20  }]
+    @UI.identification: [{ position: 20 }]
+    Specification;
+
+    @UI.lineItem: [{ position: 30  }]
+    @UI.identification: [{ position: 30 }]
+    DocType;
+
+    @UI.lineItem: [{ position: 40  }]
+    @UI.identification: [{ position: 40 }]
+    StorageCat;
+
+    @UI.lineItem: [{ position: 50  }]
+    @UI.identification: [{ position: 50 }]
+    DocNo;
+
+    @UI.lineItem: [{ position: 60 }]
+    @UI: { identification: [ { position: 60 , label: 'File' } ] }
+    Attachment;
+
+    @UI.hidden: true
+    Mimetype;
+
+    @UI.hidden: true
+    Filename;
+
+  }

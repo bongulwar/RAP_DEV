@@ -1,0 +1,5 @@
+@EndUserText.label: 'Travel UI Service'
+define service ZUI_Travel_V2 {
+  expose ZI_CONNECTION;
+  expose ZI_FLIGHT_R;
+}

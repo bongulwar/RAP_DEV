@@ -1,0 +1,125 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI.headerInfo: {
+    typeName: 'Travel',
+    typeNamePlural: 'Travels',
+    title: {
+        type: #STANDARD,
+        label: 'Travel',
+        value: 'TravelId'
+    }
+}
+annotate entity ZC_TRAVEL_TECH_M with
+  {
+    -- Display Header fields in Object Page
+    @UI.facet: [{
+                    id: 'Travel',
+                    purpose: #STANDARD,
+                    position: 10,
+                    label: 'Travel Details',
+                    type: #IDENTIFICATION_REFERENCE
+                },
+                {
+                    id: 'Booking',
+                    purpose: #STANDARD,
+                    position: 20,
+                    label: 'Booking Details',
+                    type: #LINEITEM_REFERENCE,
+                    targetElement: '_Booking'
+                }]
+
+
+    @UI:{
+          lineItem:       [{ position: 10 },
+                           { type: #FOR_ACTION , dataAction: 'copyTravel' ,label: 'Copy Travel (Factory Action)'}     ],
+          selectionField: [{ position: 10 }],
+          identification: [{ position: 10 }]
+         }
+    @Search.defaultSearchElement: true
+    TravelId;
+    -- Table column
+    @UI:{
+           lineItem:       [{ position: 20 }],
+           selectionField: [{ position: 20 }],
+           identification: [{ position: 20 }]
+        }
+    -- Enable Search
+    @Search.defaultSearchElement: true
+
+    --F4 Help
+    @Consumption.valueHelpDefinition: [{ entity: {
+        name: '/DMO/I_Agency',
+        element: 'AgencyID'
+    } }]
+    AgencyId;
+
+    //    AgencyName;
+
+    @UI:{
+          lineItem:       [{ position: 30 }],
+          selectionField: [{ position: 30 }],
+          identification: [{ position: 30 }]
+    }
+    @Search.defaultSearchElement: true
+    --F4 Help
+    @Consumption.valueHelpDefinition: [{ entity: {
+          name: '/DMO/I_Customer',
+        element: 'CustomerID'
+    } }]
+    //    @UI.textArrangement: #TEXT_LAST  //1 (Buchholm)
+    @UI.textArrangement: #TEXT_ONLY  // Buchholm
+    CustomerId;
+
+    @UI:{
+          lineItem:       [{ position: 40 }],
+          selectionField: [{ position: 40 }],
+          identification: [{ position: 40 }]
+    }
+
+    BeginDate;
+    @UI:{
+          lineItem:       [{ position: 50 }],
+          selectionField: [{ position: 50 }],
+          identification: [{ position: 50 }]
+    }
+    EndDate;
+    //    BookingFee;
+    @UI:{
+          lineItem:       [{ position: 60 }],
+    //          selectionField: [{ position: 10 }],
+          identification: [{ position: 60 }]
+    }
+    TotalPrice;
+    @Consumption.valueHelpDefinition: [{ entity: {
+        name: 'I_Currency',
+        element: 'Currency'
+    } }]
+    CurrencyCode;
+    @UI:{
+          lineItem:       [{ position: 70 }],
+    //          selectionField: [{ position: 10 }],
+          identification: [{ position: 70 }]
+    }
+    @Search.defaultSearchElement: true
+    @Search.fuzzinessThreshold: 0.8  //Allowed partial strnf search like 80% match
+    Description;
+
+    @Consumption.valueHelpDefinition: [{ entity: {
+                                                    name: '/DMO/I_Overall_Status_VH',
+                                                    element: 'OverallStatus'
+                                                } }]
+    @UI:{     lineItem:       [{ position: 70 }],
+              identification: [{ position: 80 }],
+              selectionField: [{ position: 50 }],
+              textArrangement: #TEXT_ONLY
+        }
+    OverallStatus;
+    //    Text;
+    //    CreatedBy;
+    //    CreatedAt;
+    @UI.identification: [{ position: 90 }]
+    LastChangedBy;
+
+    @UI.identification: [{ position: 95 }]
+    LastChangedAt;
+  }

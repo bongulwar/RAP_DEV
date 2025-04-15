@@ -1,0 +1,128 @@
+@Metadata.layer: #PARTNER
+annotate entity ZWB_C_HEADER with
+{
+  @UI.facet: [
+   {
+                 id : 'Employe',
+                 type: #COLLECTION,
+                 label: 'Employe Information',
+                 position: 10
+   },
+     {
+    id: 'Fieldgroup1-Id',
+    type: #FIELDGROUP_REFERENCE,
+    label: 'Gate Entry Data',
+    parentId: 'WB',
+    targetQualifier: 'Fieldgroup1',
+    position: 10
+  },
+     {
+      id: 'Fieldgroup2-Id',
+    type: #FIELDGROUP_REFERENCE,
+    label: 'Weigh Bridge Weight',
+    parentId: 'WB',
+    targetQualifier: 'Fieldgroup2',
+    position: 20
+   },
+   {
+      id: 'Fieldgroup3-Id',
+    type: #FIELDGROUP_REFERENCE,
+    label: 'Weigh Bridge Vehicle Details',
+    parentId: 'WB',
+    targetQualifier: 'Fieldgroup3',
+    position: 30
+    },
+     {
+    id: 'WB_Details',
+    purpose: #STANDARD,
+    type: #LINEITEM_REFERENCE,
+    label: 'Weight Bridge Details',
+    position: 20,
+    targetElement: '_item'
+   }]
+
+  @UI: { lineItem: [{ position: 10 , label: 'Gate Pass Number' }],
+      identification: [{ position: 10, label: 'Gate Pass Number' }],
+      fieldGroup: [{ position: 10, qualifier: 'Fieldgroup1' }]
+         }
+  Id;
+  @UI: { lineItem: [{ position: 20 , label: 'Plant' }],
+      identification: [{ position: 20, label: 'Plant' }],
+         fieldGroup: [{ position: 10, qualifier: 'Fieldgroup1' }]
+      }
+  Werks;
+  @UI: { lineItem: [{ position: 30 , label: 'PO Number' }],
+     identification: [{ position: 30, label: 'PO Number' }],
+        fieldGroup: [{ position: 10, qualifier: 'Fieldgroup1' }]
+     }
+  Ebeln;
+  @UI: { lineItem: [{ position: 40 , label: 'Supplier Name' }],
+    identification: [{ position: 40, label: 'Supplier Name' }],
+       fieldGroup: [{ position: 10, qualifier: 'Fieldgroup1' }]
+    }
+  Name;
+
+
+  @UI: { lineItem: [{ position: 50 , label: 'Gross Weight' }],
+    identification: [{ position: 50, label: 'Gross Weight' }],
+       fieldGroup: [{ position: 20, qualifier: 'Fieldgroup2' }]
+    }
+  GrossWt;
+  @UI: { lineItem: [{ position: 60 , label: 'Tare Weight' }],
+  identification: [{ position: 60, label: 'Tare Weight' }],
+     fieldGroup: [{ position: 20, qualifier: 'Fieldgroup2' }]
+  }
+  TareWt;
+  @UI: { lineItem: [{ position: 70 , label: 'Net Weight' }],
+  identification: [{ position: 70, label: 'Net Weight' }],
+     fieldGroup: [{ position: 20, qualifier: 'Fieldgroup2' }]
+  }
+  NetWt;
+
+  @UI: { lineItem: [{ position: 80 , label: 'Vehicle Number' }],
+      identification: [{ position: 80, label: 'Vehicle Number' }],
+         fieldGroup: [{ position: 30, qualifier: 'Fieldgroup3' }]
+      }
+  Vehicle;
+  @UI: { lineItem: [{ position: 90 , label: 'Vehicle Type' }],
+      identification: [{ position: 90, label: 'Vehicle Type' }],
+         fieldGroup: [{ position: 30, qualifier: 'Fieldgroup3' }]
+      }
+  VehicleType;
+
+  @UI: { lineItem: [{ position: 100 , label: 'Creation Date' }],
+      identification: [{ position: 100, label: 'Creation Date' }],
+         fieldGroup: [{ position: 30, qualifier: 'Fieldgroup3' }]
+      }
+  Createdate;
+  @UI.hidden: true
+  Meins;
+  @UI: { lineItem: [{ position: 110 , label: 'Check In Date' }],
+   identification: [{ position: 110, label: 'Check In Date' }],
+      fieldGroup: [{ position: 30, qualifier: 'Fieldgroup3' }]
+   }
+  ChkInDate;
+  @UI: { lineItem: [{ position: 120 , label: 'Check In Time' }],
+    identification: [{ position: 120, label: 'Check In Time' }],
+       fieldGroup: [{ position: 30, qualifier: 'Fieldgroup3' }]
+    }
+  ChkInTime;
+  @UI: { lineItem: [{ position: 130 , label: 'Check Out Date' }],
+    identification: [{ position: 130, label: 'Check Out Date' }],
+       fieldGroup: [{ position: 30, qualifier: 'Fieldgroup3' }]
+    }
+  ChkOutDate;
+  @UI: { lineItem: [{ position: 140 , label: 'Check Out Time' }],
+    identification: [{ position: 140, label: 'Check Out Time' }],
+       fieldGroup: [{ position: 30, qualifier: 'Fieldgroup3' }]
+    }
+  ChkOutTime;
+  @UI.hidden: true
+  Lastchangedat;
+  @UI.hidden: true
+  Locallastchangedat;
+  /* Associations */
+  @UI.selectionField: [{ element: '_item.Ebeln' ,position:  10 }]
+  _item;
+
+}

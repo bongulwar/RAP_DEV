@@ -1,0 +1,5 @@
+@EndUserText.label: 'service Defination WB'
+define service Zwb_service_bin {
+  expose ZWB_C_HEADER as header_h;
+  expose ZWB_C_ITEM   as item;
+}

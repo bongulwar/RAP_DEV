@@ -1,0 +1,6 @@
+@ObjectModel.leadingEntity.name: 'ZC_ErrorCode0001_S'
+define service ZUI_ERRORCODE0001 {
+  expose ZC_ERRORCODE0001_S as ErrorCode0001All;
+  expose ZC_ERRORCODE0001 as ErrorCode0001;
+  expose ZC_ERRORCODE0001TEXT as ErrorCode0001Text;
+}

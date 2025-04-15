@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service for DOC Att to Specification'
+define service ZC_DOC_ATT {
+  expose ZC_DOC_ATT;
+}

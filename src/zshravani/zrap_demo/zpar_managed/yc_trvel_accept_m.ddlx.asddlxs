@@ -1,0 +1,84 @@
+@Metadata.layer: #CUSTOMER
+@Search.searchable: true
+@UI.headerInfo: {
+    typeName: 'Accept Travel',
+    typeNamePlural: 'Accept Travels',
+    title: {
+        type: #STANDARD,
+        label: 'Accept Travel',
+        value: 'TravelId'
+           }
+}
+annotate entity YC_TRVEL_ACCEPT_M with
+  {
+
+    //Object Page ( 2nd Page )
+    @UI.facet: [{
+                    id: 'Travel_accept',
+                    purpose: #STANDARD,
+                    position: 10,
+                    label: 'Accept Travel',
+                    type: #IDENTIFICATION_REFERENCE
+                },{
+                    id: 'Accept_Booking',
+                    purpose: #STANDARD,
+                    position: 20,
+                    label: 'Accept Booking',
+                    type: #LINEITEM_REFERENCE,
+                    targetElement: '_Booking'
+                 }]
+
+    //Master Page ( 1st Page)
+    @UI.lineItem: [{ position: 10 },
+                   { type: #FOR_ACTION, dataAction: 'accetptTravel', label: 'Accept Travel' },
+                   { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }
+                  ]
+    @UI.identification: [{ position: 10 }]
+    @Search.defaultSearchElement: true
+    TravelId;
+    @Search.defaultSearchElement: true
+    @UI:{
+        lineItem:       [{ position: 15 }],
+        identification: [{ position: 15 }]
+    }
+    AgencyId;
+
+    //    @UI:{
+    //         lineItem:       [{ position: 60 }],
+    //         identification: [{ position: 60 }]
+    //     }
+    //    AgencyName;
+    @UI:{
+            lineItem:       [{ position: 20 }],
+            identification: [{ position: 20 }]
+        }
+
+    CustomerId;
+    @UI:{
+         lineItem:       [{ position: 30 }],
+         identification: [{ position: 30 }]
+     }
+    CustomerName;
+    @UI:{
+         lineItem:       [{ position: 40 }],
+         identification: [{ position: 40 }]
+     }
+    BeginDate;
+
+    //    EndDate;
+    //    BookingFee;
+    //    TotalPrice;
+    //    CurrencyCode;
+    //    Description;
+    @UI:{
+        lineItem:       [{ position: 60 }],
+        identification: [{ position: 60 }]
+    }
+    OverallStatus;
+    //    OverallStatusText;
+    //    CreatedBy;
+    //    CreatedAt;
+    //    LastChangedBy;
+    //    LastChangedAt;
+
+  }

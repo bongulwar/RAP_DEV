@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Def: ZSD_C_HEADER'
+define service ZSD_C_HEADER {
+  expose ZSD_C_HEADER;
+}

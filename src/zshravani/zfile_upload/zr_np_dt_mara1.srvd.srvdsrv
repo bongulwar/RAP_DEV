@@ -1,0 +1,4 @@
+@EndUserText.label: 'ZR_NP_DT_MARA1'
+define service ZR_NP_DT_MARA1 {
+  expose ZR_NP_DT_MARA1;
+}

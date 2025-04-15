@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Defination For Invoice Header'
+define service ZC_CUST_INVOICE_H {
+  expose ZC_CUST_INVOICE_H as Invoice_H;
+  expose ZC_CUST_INVOICE_I as Invoice_I;
+}

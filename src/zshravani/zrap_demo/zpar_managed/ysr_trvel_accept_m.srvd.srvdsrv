@@ -1,0 +1,5 @@
+@EndUserText.label: 'Accept Travel Request'
+define service YSR_TRVEL_ACCEPT_M {
+  expose YC_TRVEL_ACCEPT_M;
+  expose YC_BOOKING_TECH_M;
+}

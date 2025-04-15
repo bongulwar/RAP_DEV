@@ -1,0 +1,117 @@
+managed implementation in class zbp_i_travel_tech_m unique;
+strict ( 2 );
+
+define behavior for ZI_TRAVEL_TECH_M //alias <alias_name>
+implementation in class zbp_i_travel_tech_m unique
+persistent table ytravel_tech_m  //No persistency is specified for "ZI_TRAVEL_TECH_M" ("ZI_TRAVEL_TECH_M" has the implementation type "managed").
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+early numbering
+{
+  // administrative fields: read only
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedBy, CreatedAt;
+
+  field ( readonly ) TravelId;  // Because of early numbering - It shout be read only in UI
+
+  field ( mandatory ) BeginDate, EndDate, CurrencyCode;                  //- WE have to write code for validation
+  field ( mandatory : create, readonly : update ) CustomerId, AgencyId;  //validated by Freamwork
+
+  factory action copyTravel [1];
+
+  action ( features : instance ) accetptTravel result [1] $self;
+  action ( features : instance ) rejectTravel result [1] $self;
+
+  //--Validation
+  validation validateCustomer on save
+  {
+    create;
+    field CustomerId;
+  }
+
+  //CRUD Operations Enable
+  create;
+  update;
+  delete;
+
+  association _Booking { create ( features : instance ); }
+
+  //- Used if Both Table fields and CDS Fields are same name
+  // mapping for ytravel_tech_m corresponding;
+  mapping for ytravel_tech_m
+    {
+      TravelId      = travel_id;
+      CustomerId    = customer_id;
+      AgencyId      = agency_id;
+      BeginDate     = begin_date;
+      EndDate       = end_date;
+      BookingFee    = booking_fee;
+      TotalPrice    = total_price;
+      CurrencyCode  = currency_code;
+      Description   = description;
+      OverallStatus = overall_status;
+      CreatedAt     = created_at;
+      CreatedBy     = created_by;
+      LastChangedBy = last_changed_by;
+      LastChangedAt = last_changed_at;
+    }
+}
+
+define behavior for ZI_BOOKING_TECH_M //alias <alias_name>
+implementation in class zbp_booking_tech_m unique
+persistent table ybooking_tech_m
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LastChangedAt
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) TravelId, BookingId; // Because of early numbering - It shout be read only in UI
+  // administrative fields: read only
+  field ( readonly ) LastChangedAt;
+  association _Travel;
+  association _BookingSuppl { create ( features : instance ); }
+
+  mapping for ybooking_tech_m
+    {
+      TravelId      = travel_id;
+      BookingId     = booking_id;
+      BookingDate   = booking_date;
+      CustomerId    = customer_id;
+      CarrierId     = carrier_id;
+      ConnectionId  = connection_id;
+      FlightDate    = flight_date;
+      FlightPrice   = flight_price;
+      CurrencyCode  = currency_code;
+      BookingStatus = booking_status;
+      LastChangedAt = last_changed_at;
+    }
+}
+
+define behavior for ZI_BOOKSUPPL_TECK_M //alias <alias_name>
+implementation in class zbp_booksuppl_tech_m unique
+persistent table ybooksupp_tech_m
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LastChangedAt
+early numbering
+{
+  update;
+  delete;
+  field ( readonly ) TravelId, BookingId, BookingSupplementId; // Because of early numbering - It shout be read only in UI
+  field ( readonly ) LastChangedAt;
+  association _Travel;
+  association _Booking;
+
+  mapping for ybooksupp_tech_m
+    {
+      TravelId            = travel_id;
+      BookingId           = booking_id;
+      BookingSupplementId = booking_supplement_id;
+      SupplementId        = supplement_id;
+      Price               = price;
+      CurrencyCode        = currency_code;
+      LastChangedAt       = last_changed_at;
+    }
+}

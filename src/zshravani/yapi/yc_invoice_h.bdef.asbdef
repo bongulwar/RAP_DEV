@@ -1,0 +1,27 @@
+projection;
+strict ( 2 );
+
+define behavior for yc_invoice_h //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+  use association _Invoice_item { create; }
+  use association _Invoice_log { create; }
+}
+
+define behavior for yc_invoice_i //alias <alias_name>
+{
+  use update;
+  use delete;
+
+  use association _Invoice_h;
+}
+
+define behavior for yc_invoice_log //alias <alias_name>
+{
+  use update;
+  use delete;
+  use association _Invoice_h;
+}

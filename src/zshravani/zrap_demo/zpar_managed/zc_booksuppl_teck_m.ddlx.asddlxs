@@ -1,0 +1,72 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI.headerInfo: {
+    typeName: 'Suppliment',
+    typeNamePlural: 'Suppliments',
+    title: {
+        type: #STANDARD,
+        label: 'Suppliment',
+        value: 'SupplementId'
+    }
+}
+annotate entity ZC_BOOKSUPPL_TECK_M with
+  { -- Display Header fields in Object Page
+    @UI.facet: [{
+                    id: 'Suppl',
+                    purpose: #STANDARD,
+                    position: 10,
+                    label: 'Suppliment Details',
+                    type: #IDENTIFICATION_REFERENCE
+                }]
+    @UI:{
+          lineItem:       [{ position: 10 }],
+          selectionField: [{ position: 10 }],
+          identification: [{ position: 10 }]
+         }
+    @Search.defaultSearchElement: true
+    TravelId;
+
+    @UI:{
+      lineItem:       [{ position: 10 }],
+      selectionField: [{ position: 10 }],
+      identification: [{ position: 10 }]
+     }
+    @Search.defaultSearchElement: true
+
+    BookingId;
+    @Search.defaultSearchElement: true
+    @UI:{
+      lineItem:       [{ position: 20 }],
+      selectionField: [{ position: 20 }],
+      identification: [{ position: 20 }]
+     }
+    BookingSupplementId;
+    @UI:{
+      lineItem:       [{ position: 30 }],
+      selectionField: [{ position: 30 }],
+      identification: [{ position: 30 }]
+     }
+    @Search.defaultSearchElement: true
+    @Consumption.valueHelpDefinition: [{ entity: {
+           name: '/DMO/I_Supplement',
+           element: 'SupplementID'
+       },
+       additionalBinding: [{
+                                localElement: 'Price',
+                                element: 'Price'
+                           },{
+                                localElement: 'CurrencyCode',
+                                element: 'CurrencyCode'
+                           }] }]
+    SupplementId;
+    //    Price;
+    @Consumption.valueHelpDefinition: [{ entity: {
+       name: 'I_Currency',
+       element: 'Currency'
+    } }]
+    CurrencyCode;
+    //Element 'CurrencyCode' must have at least one annotation
+    @UI.hidden: true
+    LastChangedAt;
+
+  }

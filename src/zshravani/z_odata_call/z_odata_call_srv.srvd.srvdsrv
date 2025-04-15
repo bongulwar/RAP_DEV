@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Defination for Z_ODATA_CALL'
+define service Z_ODATA_CALL_SRV {
+  expose ZCE_WEIGHT_BRIDGE;
+}

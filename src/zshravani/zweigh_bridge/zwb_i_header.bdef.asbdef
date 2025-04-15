@@ -1,0 +1,73 @@
+managed implementation in class zbp_wb_i_header unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZWB_I_HEADER alias header_h
+persistent table zwb_header
+draft table zwb_d_header
+early numbering
+lock master total etag Lastchangedat
+authorization master ( instance )
+etag master Locallastchangedat
+{
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( readonly ) Id;
+
+  association _item { create; with draft; }
+
+  mapping for zwb_header
+    {
+      Id                 = id;
+      Werks              = werks;
+      Ebeln              = ebeln;
+      Vehicle            = vehicle;
+      VehicleType        = vehicle_type;
+      Name               = name;
+      Createdate         = createdate;
+      GrossWt            = gross_wt;
+      TareWt             = tare_wt;
+      NetWt              = net_wt;
+      Meins              = meins;
+      ChkInDate          = chk_in_date;
+      ChkInTime          = chk_in_time;
+      ChkOutDate         = chk_out_date;
+      ChkOutTime         = chk_out_time;
+      Lastchangedat      = lastchangedat;
+      Locallastchangedat = locallastchangedat;
+    }
+}
+
+define behavior for ZWB_I_ITEM alias _item
+persistent table zwb_item
+draft table zwb_d_item
+early numbering
+lock dependent by _header
+authorization dependent by _header
+etag dependent by _header
+{
+  update;
+  delete;
+
+  field ( readonly ) Id, Ebeln, Matnr, Posnr;
+
+  association _header { with draft; }
+
+  mapping for zwb_item control zsc_wb_item
+    {
+      Id      = id;
+      Ebeln   = ebeln;
+      Matnr   = matnr;
+      Posnr   = posnr;
+      Qty     = qty;
+      Meins   = meins;
+    }
+}

@@ -1,0 +1,40 @@
+projection implementation in class ZBP_C_ERRORCODE0001_S unique;
+strict;
+use draft;
+use side effects;
+define behavior for ZC_ErrorCode0001_S alias ErrorCode0001All
+
+{
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action SelectCustomizingTransptReq;
+
+  use association _ErrorCode0001 { create ( augment ); with draft; }
+}
+
+define behavior for ZC_ErrorCode0001 alias ErrorCode0001
+
+{
+  field ( modify )
+   Description;
+
+
+  use update( augment );
+  use delete;
+
+  use association _ErrorCode0001All { with draft; }
+  use association _ErrorCode0001Text { create; with draft; }
+}
+
+define behavior for ZC_ErrorCode0001Text alias ErrorCode0001Text
+
+{
+  use update;
+  use delete;
+
+  use association _ErrorCode0001All { with draft; }
+  use association _ErrorCode0001 { with draft; }
+}

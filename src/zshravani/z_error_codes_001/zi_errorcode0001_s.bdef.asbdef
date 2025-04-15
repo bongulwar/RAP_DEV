@@ -1,0 +1,121 @@
+managed with additional save implementation in class ZBP_I_ERRORCODE0001_S unique;
+strict;
+with draft;
+define behavior for ZI_ErrorCode0001_S alias ErrorCode0001All
+draft table zerror_code_d_s
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master ( global )
+
+{
+  field ( readonly )
+  SingletonID;
+
+  field ( features : instance )
+  TransportRequestID;
+
+  field ( notrigger )
+  SingletonID,
+  LastChangedAtMax;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit with additional implementation;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _ErrorCode0001 { create ( features : instance ); with draft; }
+
+  side effects
+  {
+    action SelectCustomizingTransptReq affects $self;
+  }
+}
+
+define behavior for ZI_ErrorCode0001 alias ErrorCode0001 ##UNMAPPED_FIELD
+persistent table zerror_codes_001
+draft table zerror_codes__d
+etag master LocalLastChangedAt
+lock dependent by _ErrorCode0001All
+authorization dependent by _ErrorCode0001All
+
+{
+  field ( mandatory : create )
+  ErrorCode;
+
+  field ( readonly )
+  SingletonID,
+  LastChangedAt,
+  LocalLastChangedAt;
+
+  field ( readonly : update )
+  ErrorCode;
+
+  field ( notrigger )
+  SingletonID,
+  LastChangedAt,
+  LocalLastChangedAt;
+
+
+  update ( features : global );
+  delete ( features : global );
+
+  mapping for zerror_codes_001
+    {
+      ErrorCode          = ERROR_CODE;
+      LastChangedAt      = LAST_CHANGED_AT;
+      LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    }
+
+  association _ErrorCode0001All { with draft; }
+  association _ErrorCode0001Text { create ( features : global ); with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}
+
+define behavior for ZI_ErrorCode0001Text alias ErrorCode0001Text ##UNMAPPED_FIELD
+persistent table zerrcodet_0001
+draft table zerrcodet_000_d
+etag master LocalLastChangedAt
+lock dependent by _ErrorCode0001All
+authorization dependent by _ErrorCode0001All
+
+{
+  field ( mandatory : create )
+  Langu;
+
+  field ( readonly )
+  SingletonID,
+  ErrorCode,
+  LocalLastChangedAt;
+
+  field ( readonly : update )
+  Langu;
+
+  field ( notrigger )
+  SingletonID,
+  LocalLastChangedAt;
+
+
+  update ( features : global );
+  delete ( features : global );
+
+  mapping for zerrcodet_0001
+    {
+      Langu              = LANGU;
+      ErrorCode          = ERROR_CODE;
+      Description        = DESCRIPTION;
+      LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+    }
+
+  association _ErrorCode0001All { with draft; }
+  association _ErrorCode0001 { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

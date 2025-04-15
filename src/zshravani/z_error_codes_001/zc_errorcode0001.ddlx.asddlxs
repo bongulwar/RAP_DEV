@@ -1,0 +1,45 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'ErrorCode0001',
+    typeNamePlural: 'ErrorCode0001s',
+    title: {
+      type: #STANDARD,
+      label: 'Error Code 0001',
+      value: 'ErrorCode'
+    }
+  }
+}
+// https://developers.sap.com/group.abap-env-factory.html
+annotate view ZC_ErrorCode0001 with
+    {
+        @UI.identification: [ {
+          position: 1
+        } ]
+        @UI.lineItem: [ {
+          position: 1
+        } ]
+        @UI.facet: [ {
+          id: 'ZI_ErrorCode0001',
+          purpose: #STANDARD,
+          type: #IDENTIFICATION_REFERENCE,
+          label: 'Error Code 0001',
+          position: 1
+        },
+        {
+          id: 'ZI_ErrorCode0001Text',
+          type: #LINEITEM_REFERENCE,
+          label: 'Error Code 0001 Text',
+          position: 2 ,
+          targetElement: '_ErrorCode0001Text'
+        } ]
+        ErrorCode;
+        @UI.identification: [ {
+          hidden: true,
+          position: 2
+        } ]
+        @UI.lineItem: [ {
+          position: 2
+        } ]
+        Description;
+    }

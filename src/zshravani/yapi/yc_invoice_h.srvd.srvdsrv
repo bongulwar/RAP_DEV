@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Defination For Invoice'
+define service YC_INVOICE_H {
+  expose yc_invoice_h;
+  expose yc_invoice_i;
+  expose yc_invoice_log;
+}
