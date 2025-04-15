@@ -1,0 +1,34 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "YC_Student O4",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "generalInformation": {
+    "appType": "ui5",
+    "catalogId": "SAP_TC_UI5_REPO_UIAD"
+  },
+  "ui5AppDetails": {
+    "appId": "com.sap.ycstudent"
+  },
+  "navigation": {
+    "targetMappingId": "UI5R_A8E2CCBB9F5181857CF3C6BF07CAFFC70D3A9F67_TM",
+    "semanticObject": "YC_STUDENT",
+    "action": "Display",
+    "desktop": true,
+    "tablet": true,
+    "phone": true
+  },
+  "tiles": [
+    {
+      "id": "UI5R_A8E2CCBB9F5181857CF3C6BF07CAFFC70D3A9F67_AL",
+      "tileType": "static",
+      "isDefault": true,
+      "standard": {
+        "title": "YC_Student O4",
+        "subtitle": "Odata V4 App"
+      }
+    }
+  ]
+}

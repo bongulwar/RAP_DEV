@@ -1,0 +1,61 @@
+@Metadata.layer: #PARTNER
+// Step 7 ->Add annotation
+//        @UI.lineItem: [{ position: 10, label: '' }]
+//        @UI.identification: [{ position: 10, label: '' }]
+//        @UI.facet:
+//
+@UI.headerInfo: {
+    typeName: 'Student Detail',
+    typeNamePlural: 'Student Details'
+//    title: {
+//        type: #STANDARD,
+//        label: 'Student Detail',
+//        value: 'Firstname'
+//    },
+//    description: {
+//        type: #STANDARD,
+//        label: 'Student description',
+//        value: 'Id'
+//    }
+}
+annotate entity YC_STUDENT with
+  {
+    @UI.facet: [{
+        id: 'Student_Label',
+        purpose: #STANDARD,
+        position: 10,
+        label:  'Student Label',
+        type: #IDENTIFICATION_REFERENCE
+    }]
+    @UI.lineItem: [{ position: 10, label: 'Student ID' }]
+    @UI.identification: [{ position: 10, label: 'Student ID' }]
+    ID;
+    @UI.lineItem: [{ position: 20, label: 'First Name' }]
+    @UI.identification: [{ position: 20, label: 'First Name' }]
+    FIRSTNAME;
+    @UI.lineItem: [{ position: 30, label: 'Last Name' }]
+    @UI.identification: [{ position: 30, label: 'Last Name' }]
+    LASTNAME;
+    @UI.lineItem: [{ position: 40, label: 'Age' }]
+    @UI.identification: [{ position: 40, label: 'Age' }]
+    Age;
+    @UI.lineItem: [{ position: 50, label: 'Course' }]
+    @UI.identification: [{ position: 50, label: 'Course' }]
+    Course;
+    @UI.lineItem: [{ position: 60, label: 'Course Duration' }]
+    @UI.identification: [{ position: 60, label: 'Course Duration' }]
+    Courseduration;
+    @UI.lineItem: [{ position: 70, label: 'Status' }]
+    @UI.identification: [{ position: 70, label: 'Status' }]
+    Status;
+    @UI.lineItem: [{ position: 80, label: 'Gender' },
+                   { type: #FOR_ACTION, label: 'SetAdmitted', dataAction: 'SetAdmitted' }] //hidden: #( HideActCreateNote )
+    @UI.identification: [{ position: 80, label: 'Gender' },
+                         { type: #FOR_ACTION, label: 'Set Admitted',
+                         dataAction: 'SetAdmitted' }   ]
+    Gender;
+    @UI.lineItem: [{ position: 90, label: 'DOB' }]
+    @UI.identification: [{ position: 90, label: 'DOB' }]
+    Dob;
+  }
+// Step 8 -> Create behavior defination on Interface View ( YI_STUDENT )

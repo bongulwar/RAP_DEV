@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service for Custom ADOBE Form'
+define service ZSAC_UI_PURCHASE_ORDER {
+  expose zsac_r_po_query;
+  expose zsac_i_po_header;
+}

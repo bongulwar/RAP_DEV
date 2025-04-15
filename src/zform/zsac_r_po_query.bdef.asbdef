@@ -1,0 +1,43 @@
+unmanaged implementation in class zbp_sac_r_po_query unique;
+strict; //( 1 );
+
+define behavior for zsac_r_po_query //alias <alias_name>
+//persistent table i_purchaseorderapi01
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  //  create;
+  //  update;
+  //  delete;
+  field ( readonly ) PurchaseOrder;
+  //  association _POheader { create; }
+  association _POheader;
+  mapping for i_purchaseorderapi01 corresponding;
+}
+
+define behavior for zsac_i_po_header //alias <alias_name>
+//persistent table ekko
+lock dependent by _query
+authorization dependent by _query
+//etag master <field_name>
+{
+  //  update;
+  //  delete;
+  field ( readonly ) PurchaseOrder;
+  association _query;
+  //  association _POitem { create; }
+//    association _POitem { }
+}
+
+//define behavior for zsac_i_po_item //alias <alias_name>
+////persistent table ekpo
+//lock dependent by _POheader
+//authorization dependent by _POheader
+////etag master <field_name>
+//{
+//  //  update;
+//  //  delete;
+//  field ( readonly ) PurchaseOrder, PurchaseOrderItem;
+//  association _POheader;
+//}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service Defination for YC_STUDENT'
+define service YC_STUDENT {
+  expose YC_STUDENT;
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Get PO PDF String'
+define service ZSAC_UI_PO_PDF {
+  expose ZSAC_I_PO_PDF;
+}

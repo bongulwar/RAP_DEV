@@ -1,0 +1,61 @@
+managed implementation in class zbp_i_student unique;
+strict ( 2 );
+with draft;
+//define behavior for YI_STUDENT //alias <alias_name>
+// Step 9 - Add alias name
+// Step 10 -> Add numbering : managed for ID field
+// Step 11 -> System want to know which field from CDS need to Mapping to DB-Field
+//         -> Class "ZBP_I_STUDENT" does not exist.
+// Step 12 -> Create Behavior class
+// Step 13 -> Create Behavior Defination for Consumtion view.
+
+define behavior for YI_STUDENT alias Student //(Step 9)
+draft table ydf_student
+
+persistent table ystudent // <Data_Table> Is requred if MANAGED scenario/ but not required if Un-Managed
+
+//lock master                               //total etag" field can be flagged only if "with draft" is used.
+// Total ETag alway defined in Root Entity only
+lock master total etag locallastchangedat   //total etag" field can be flagged only if "with draft" is used.
+authorization master ( instance )
+
+//etag master lastchangedat //- If Total ETag Active  then use the same Field i.e. 'locallastchangedat'
+etag master locallastchangedat
+{
+  create;
+  update;
+  delete;
+
+  //  field ( readonly ) Id;
+  //The read-only field "ID" should be flagged as "numbering:managed" to give it a UUID automatically when created.
+  field ( numbering : managed, readonly ) Id; //(Step 10)
+  //(Step 11)
+  draft action Edit;
+  draft action Resume;
+  draft action Activate optimized;
+  draft action Discard;
+  draft determine action Prepare;
+  // Define Action ( Feature instance support for Dynamic changes 'Active /Inactivate' action button for perticular record)
+  action ( features : instance ) setAdmitted result [1] $self;
+
+//  mapping for ystudent //<database tabe>
+//    {
+//
+//      //<CDS_field> = <DB_field>
+//      Id                 = id;
+//      FIRSTNAME          = firstname;
+//      LASTNAME           = lastname;
+//      Age                = age;
+//      Course             = course;
+//      Courseduration     = courseduration;
+//      Status             = status;
+//      Gender             = gender;
+//      Dob                = dob;
+//      lastchangedat      = lastchangedat;
+//      locallastchangedat = locallastchangedat;
+//    }
+}
+
+// CRUD operation will be Managed by RAP-Freamwork in MANAGED scenario
+// Only Validation, determination are user defined
+// ETag work allong with Lock Objects

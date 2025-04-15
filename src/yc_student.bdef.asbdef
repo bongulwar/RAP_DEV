@@ -1,0 +1,26 @@
+projection;
+strict ( 2 );
+use draft;  //If "use draft" is used with "strict", the draft action "Edit" must be included explicitly in the projection.
+//Step 14 -> Add alias name
+
+//define behavior for YC_STUDENT //alias <alias_name>
+define behavior for YC_STUDENT alias Student //(Step 14)
+use etag
+{
+  use create;
+  use update;
+  use delete;
+
+  // If we used Drfat then add below USe actions too in Projection BP
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Prepare;
+  use action Resume;
+
+  use action setAdmitted;
+}
+
+// Step 15 -> Create Service Defination on consumtion CDS(YC_STUDENT).
+// Step 16 -> Service Binding of Service def -YC_STUDENT - ODATA V2 -UI
