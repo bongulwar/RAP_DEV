@@ -10,7 +10,7 @@
 @Metadata.allowExtensions: true
 // Step 3 -> Add ROOT and 'as projection'
 // Step 4 -> Add 'provider contract transactional_query'
-// Step 5 -> Add Annotation @EndUserText.label: 'Studet RAP APp_1'
+// Step 5 -> Add Annotation @EndUserText.label: 'Studet RAP APp_1 GIT_Hub'
 define root view entity YC_STUDENT
   provider contract transactional_query
   as projection on YI_STUDENT as Student
